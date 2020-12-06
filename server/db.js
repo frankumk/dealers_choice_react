@@ -44,6 +44,7 @@ const syncAndSeed = async()=>{
         Friend.create({name: 'Rosemary', birthday: '12/15', notes: 'dog stuff'}),
         Friend.create({name: 'Mom', birthday: '04/03'}),
         Friend.create({name: 'Dad', birthday: '01/11'}),
+        Friend.create({name: 'Alicia', birthday: '01/06/1989'})
     ])
     const Nikolai = await Friend.create({name: 'Nikolai', birthday: '03/21/1988', age: 32});
     const test = await Friend.create({name: 'tester', birthday: new Date()});
