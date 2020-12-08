@@ -1,6 +1,7 @@
 const express = require('express');
 const {static} = express;
 const path = require('path');
+const moment = require('moment');
 
 const {db, syncAndSeed, Friend} = require('./db');
 
@@ -16,6 +17,20 @@ app.get('/api/friends',async(req,res,next)=>{
         res.send(await Friend.findAll({
             order: [
                 ['name','ASC']
+            ]
+        }));
+    }catch(ex){
+        next(ex);
+    }
+})
+
+app.post('/api/friends',async(req,res,next)=>{
+    try{
+        const newFriend = await Friend.create(req.body);
+        await newFriend.save();
+        res.send(await Friend.findAll({
+            order: [
+                ['name','ASC'] 
             ]
         }));
     }catch(ex){

@@ -1,8 +1,9 @@
 *{
     box-sizing: border-box;
+    padding: 0;
 }
 body{
-    font-family: Verdana;
+    font-family: 'Sigmar One', cursive;;
     background-color: black;
 }
 li {
@@ -42,4 +43,36 @@ h1{
 a{
     color: black;
     text-decoration: bold;
+}
+a:hover{
+    color:white;
+    background-color: black;
+    cursor: pointer;
+}
+.selected{
+    border: 1px black solid;
+}
+.display-today{
+    background-color:black;
+    color: white;
+    border-radius: 15px;
+}
+.face{
+    background-image: url('pika.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 60px;
+    height: 60px;
+    float: left;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 400px){
+    #container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .box{
+        width: 80%;
+    }
 }
