@@ -11,9 +11,15 @@ class App extends Component{
         this.state = {
             friends: [],
             selectedFriendId: '',
+            newFriend: '',
+            newBirthday: '',
+            search: '',
             filtered: []
         }
+        this.updateName = this.updateName.bind(this)
+        this.updateBirthday = this.updateBirthday.bind(this)
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
     
     async componentDidMount(){
@@ -24,30 +30,42 @@ class App extends Component{
             this.setState({ selectedFriendId: window.location.hash.slice(1)});
         })
         //this.setState({ selectedFriendId: window.location.hash.slice(1)});
-    }   
+    }
+
+    updateName(e){
+        this.setState({ newFriend: e.target.value });
+        //console.log(this.state.name);
+    }
+    
+    updateBirthday(e){
+        this.setState({ newBirthday: e.target.value});
+        //console.log(this.state.birthday);
+    }
 
     async onSubmit(e){
         e.preventDefault();
-        const name = document.getElementById("add-friend").value;
-        console.log(name);
-        const bday = document.getElementById("new-birthday").value;
-        console.log(bday);
-        //document.getElementById("add-form").reset(); doesnt work
-        if(name != "" && bday !=""){
-            const newFriends = (await axios.post('/api/friends',{name: name,birthday: bday}));
+        //const name = document.getElementById("add-friend").value;
+        //const bday = document.getElementById("new-birthday").value;
+        if(this.state.newFriend != "" && this.state.newBirthday !=""){
+            const newFriends = (await axios.post('/api/friends',{name: this.state.newFriend,birthday: this.state.newBirthday}));
             this.setState({ friends : newFriends.data });
         }else{
             alert ('do you not have any friends with a birthday? fill in the form!');
         }
-        document.getElementById("new-birthday").value = '';
-        document.getElementById("add-friend").value = '';
+        this.setState({newFriend: '', newBirthday: ''})
+
     }
     // remove(name){
 
     // }
 
+    handleSearch(e){
+        this.setState({search: e.target.value});
+        console.log(this.state.search);
+    }
+
     render(){
-        const { friends , selectedFriendId } = this.state;
+        const { friends , selectedFriendId , newFriend , newBirthday , search } = this.state;
         return(
             <div id = 'main'>
                 <h1>Birthday Business</h1>
@@ -57,8 +75,8 @@ class App extends Component{
                     </div>
                     <div className = 'box' id = 'right-side'>
                         <h3>The List</h3>
-                        <AddForm onSubmit={this.onSubmit} />
-                        <SearchForm friends={friends} />
+                        <AddForm onSubmit={this.onSubmit} newFriend={newFriend} newBirthday={newBirthday} updateName = {this.updateName} updateBirthday={this.updateBirthday} />
+                        <SearchForm search={search} handleSearch={this.handleSearch} />
                         <div id='friend-container'>
                             <ul id = 'friends-list'>
                                 {
