@@ -3,7 +3,7 @@ const Sequelize = require('sequelize')
 const moment = require('moment');
 const faker = require('faker');
 const { STRING } = Sequelize;
-const { DATEONLY, INTEGER, VIRTUAL } = require('sequelize');
+const { DATEONLY, INTEGER, VIRTUAL } = Sequelize
 const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/birthdays')
 
 const Friend = db.define('friend',{

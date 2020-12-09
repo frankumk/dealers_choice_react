@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 
 class AddForm extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             name: '',
             birthday: ''
         }
         this.updateName = this.updateName.bind(this)
         this.updateBirthday = this.updateBirthday.bind(this)
+        console.log(this.props);
         //this.props.onSubmit = this.props.onSubmit.bind(this);
 
     }
 
     updateName(e){
         this.setState({ name: e.target.value });
-        console.log(this.state.name);
+        //console.log(this.state.name);
     }
     
     updateBirthday(e){
         this.setState({ birthday: e.target.value});
-        console.log(this.state.birthday);
+        //console.log(this.state.birthday);
     }
 
     render(){
@@ -31,7 +32,7 @@ class AddForm extends Component{
                     <label>Add:
                         <input id='add-friend' type ='text' name='add-friend' placeholder = 'name' value={this.state.name} onChange={(e)=>this.updateName(e)} required></input>
                         <input id='new-birthday' type='text' name='new-birthday' placeholder = 'mm/dd' value={this.state.birthday} onChange={(e)=>this.updateBirthday(e)} pattern={pattern} required></input>
-                        <button id='submit' type='submit'>+</button>
+                        <button id='submit' type='submit' onClick={this.props.onSubmit}>+</button>
                     </label>
                 </form>
             </div>

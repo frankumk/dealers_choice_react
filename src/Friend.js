@@ -3,8 +3,8 @@ import axios from 'axios'
 import moment from 'moment'
 
 class Friend extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             friend: {}
         }

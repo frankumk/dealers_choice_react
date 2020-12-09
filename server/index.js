@@ -2,6 +2,7 @@ const express = require('express');
 const {static} = express;
 const path = require('path');
 const moment = require('moment');
+const Sequelize = require('sequelize')
 
 const {db, syncAndSeed, Friend} = require('./db');
 
@@ -9,6 +10,7 @@ const app = express();
 
 app.use('/dist',static(path.join(__dirname,'../dist')));
 app.use('/assets',static(path.join(__dirname,'../assets')));
+app.use(express.json());
 
 app.get('/',(req,res,next)=> res.sendFile(path.join(__dirname,'../index.html')));
 
@@ -26,6 +28,7 @@ app.get('/api/friends',async(req,res,next)=>{
 
 app.post('/api/friends',async(req,res,next)=>{
     try{
+        console.log(req.body);
         const newFriend = await Friend.create(req.body);
         await newFriend.save();
         res.send(await Friend.findAll({
@@ -59,3 +62,5 @@ const init = async()=>{
 }
 
 init();
+
+module.exports = app;

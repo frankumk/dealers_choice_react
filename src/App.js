@@ -10,8 +10,10 @@ class App extends Component{
         super()
         this.state = {
             friends: [],
-            selectedFriendId: ''
+            selectedFriendId: '',
+            filtered: []
         }
+        this.onSubmit = this.onSubmit.bind(this);
     }
     
     async componentDidMount(){
@@ -24,13 +26,25 @@ class App extends Component{
         //this.setState({ selectedFriendId: window.location.hash.slice(1)});
     }   
 
-    //addNewFriend(){}
-    onSubmit(e){
+    async onSubmit(e){
         e.preventDefault();
-        console.log(document.getElementById(""));
-        // const newFriends = (await axios.post('/api/friends',({data})));
-        // this.setState({ friends : newFriends })
+        const name = document.getElementById("add-friend").value;
+        console.log(name);
+        const bday = document.getElementById("new-birthday").value;
+        console.log(bday);
+        //document.getElementById("add-form").reset(); doesnt work
+        if(name != "" && bday !=""){
+            const newFriends = (await axios.post('/api/friends',{name: name,birthday: bday}));
+            this.setState({ friends : newFriends.data });
+        }else{
+            alert ('do you not have any friends with a birthday? fill in the form!');
+        }
+        document.getElementById("new-birthday").value = '';
+        document.getElementById("add-friend").value = '';
     }
+    // remove(name){
+
+    // }
 
     render(){
         const { friends , selectedFriendId } = this.state;
@@ -43,8 +57,8 @@ class App extends Component{
                     </div>
                     <div className = 'box' id = 'right-side'>
                         <h3>The List</h3>
-                        <AddForm onSubmit={()=>onSubmit()} />
-                        <SearchForm />
+                        <AddForm onSubmit={this.onSubmit} />
+                        <SearchForm friends={friends} />
                         <div id='friend-container'>
                             <ul id = 'friends-list'>
                                 {
