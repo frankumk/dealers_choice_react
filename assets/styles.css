@@ -1,6 +1,7 @@
 *{
     box-sizing: border-box;
     padding: 0;
+    margin: 0;
 }
 body{
     font-family: 'Sigmar One', cursive;;
@@ -44,6 +45,9 @@ a{
     color: black;
     text-decoration: bold;
 }
+.sendFlowerLink{
+    color:white;
+}
 a:hover{
     color:white;
     background-color: black;
@@ -56,6 +60,12 @@ a:hover{
     background-color:black;
     color: white;
     border-radius: 15px;
+    padding: 5px;
+    margin: 5px;
+}
+.today{
+    display: flex;
+    align-items: center;
 }
 .face{
     background-image: url('pika.jpg');
@@ -75,6 +85,12 @@ button{
     color: white;
     width: 2rem;
     height: 2rem;
+}
+#right-side{
+    overflow-y: scroll;
+}
+#right-side{
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 400px){
