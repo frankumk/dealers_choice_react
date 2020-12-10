@@ -12,8 +12,8 @@ class AddForm extends Component{
             <div id='add'>
                 <form id='add-form'>
                     <label>Add:
-                        <input id='add-friend' type ='text' name='add-friend' placeholder = 'enter unique name' value={this.props.newName} onChange={(e)=>this.props.updateName(e)} required></input>
-                        <input id='new-birthday' type='text' name='new-birthday' placeholder = 'mm/dd' value={this.props.newBirthday} onChange={(e)=>this.props.updateBirthday(e)} pattern={pattern} required></input>
+                        <br /><input id='add-friend' type ='text' name='add-friend' placeholder = 'enter unique name' value={this.props.newName} onChange={(e)=>this.props.updateName(e)} required></input><br />
+                        <input id='new-birthday' type='text' name='new-birthday' placeholder = 'mm/dd' value={this.props.newBirthday} onChange={(e)=>this.props.updateBirthday(e)} pattern={pattern} required></input><br />
                         <button id='submit' type='submit' onClick={this.props.onSubmit}>+</button>
                     </label>
                 </form>

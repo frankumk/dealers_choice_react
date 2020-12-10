@@ -10,7 +10,7 @@ class SearchForm extends Component{
             <div id= 'search'>
                 <form id='search-form'>
                     <label>Search:
-                        <input id = 'searchbar' type = 'text' name='searchbar' placeholder = 'Search friends' value={this.props.search} onChange={(e)=>this.props.handleSearch(e)} />
+                        <br /><input id = 'searchbar' type = 'text' name='searchbar' placeholder = 'Search friends' value={this.props.search} onChange={(e)=>this.props.handleSearch(e)} />
                     </label>
                 </form>
             </div>
