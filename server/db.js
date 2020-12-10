@@ -9,7 +9,8 @@ const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/birth
 const Friend = db.define('friend',{
     name: {
         type: STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     birthday: {
         type: DATEONLY,

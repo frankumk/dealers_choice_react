@@ -42,7 +42,7 @@ class Today extends Component{
                                         <img className = 'face' />
                                         <div className = 'salutation'>
                                             <p>Happy Birthday, {bday.name}!</p>
-                                            <a className="sendFlowerLink" href='https://www.1800flowers.com/?r=newengengoobrcore&adcampaign=Branded+l_DE1+fe1d&adcampaignid=960097369&adgroupid=46196718405&adid=419485677240&adtype=text&kw=1%20800%20flowers&matchtype=e&addisttype=g&gclid=Cj0KCQiA5bz-BRD-ARIsABjT4ngHDf0ntlFE5pfEUfMPg9uFntPn-B-5SDp46ETU9RBjxn6cPgdyokIaAulcEALw_wcB'>
+                                            <a className="sendFlowerLink" target='_blank' href='https://www.1800flowers.com/?r=newengengoobrcore&adcampaign=Branded+l_DE1+fe1d&adcampaignid=960097369&adgroupid=46196718405&adid=419485677240&adtype=text&kw=1%20800%20flowers&matchtype=e&addisttype=g&gclid=Cj0KCQiA5bz-BRD-ARIsABjT4ngHDf0ntlFE5pfEUfMPg9uFntPn-B-5SDp46ETU9RBjxn6cPgdyokIaAulcEALw_wcB'>
                                                 <p key = {bday.birthday}>Send Flowers</p>
                                             </a>
                                         </div>

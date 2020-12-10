@@ -20,6 +20,7 @@ class App extends Component{
         this.onSubmit = this.onSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
+
     
     async componentDidMount(){
         const friends = (await axios.get('/api/friends')).data;
@@ -45,11 +46,19 @@ class App extends Component{
         e.preventDefault();
         //const name = document.getElementById("add-friend").value;
         //const bday = document.getElementById("new-birthday").value;
-        if(this.state.newFriend != "" && this.state.newBirthday !=""){
+        const regex = "^(0?[1-9]|1[0-2])/(0?[1-9]|[12][0-9]|3[01])$";
+        const patternMatch = this.state.newBirthday.match(regex);
+        const nameExists = this.state.friends.map((friend)=>friend.name).filter((name)=>(name===this.state.newFriend));
+        if(!patternMatch){
+            alert('Birthday must be form mm/dd');
+        }else if(nameExists.length>0){
+            alert('Name should be unique');
+        }
+        else if(this.state.newFriend != "" && this.state.newBirthday !=""){
             const newFriends = (await axios.post('/api/friends',{name: this.state.newFriend,birthday: this.state.newBirthday}));
             this.setState({ friends : newFriends.data });
         }else{
-            alert ('do you not have any friends with a birthday? fill in the form!');
+            alert ('do you not have any friends with a birthday? fill in the form (with the correct format and unique name!');
         }
         this.setState({ newFriend: '', newBirthday: ''});
         const name = document.getElementById("add-friend").value='';
