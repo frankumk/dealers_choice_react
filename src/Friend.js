@@ -8,7 +8,6 @@ class Friend extends Component{
         this.state = {
             friend: {}
         }
-        this.handleDelete = this.handleDelete.bind(this);
     }
     async componentDidUpdate(prevProps){
         if(prevProps.selectedFriendId !== this.props.selectedFriendId){
@@ -23,9 +22,6 @@ class Friend extends Component{
         this.setState({ friend });
     }
 
-    handleDelete(e){
-        console.log(e.target.value);
-    }
     render(){
         const { friend } = this.state;
         const bdayMonth = moment(friend.birthday).format("MMM");
@@ -33,7 +29,7 @@ class Friend extends Component{
         return (
             <div id='detail'>
                 <h3>{`${friend.name}'s birthday is ${bdayMonth} ${bdayDate}`}</h3>
-                {/* <button value={friend} onClick={(e)=>this.handleDelete(e)}>X</button> */}
+                <button onClick={this.props.handleDelete}>x</button>
             </div>
         )
     }

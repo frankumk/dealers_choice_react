@@ -19,6 +19,7 @@ class App extends Component{
         this.updateBirthday = this.updateBirthday.bind(this)
         this.onSubmit = this.onSubmit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     
@@ -64,9 +65,14 @@ class App extends Component{
         const name = document.getElementById("add-friend").value='';
 
     }
-    // remove(name){
-
-    // }
+    async handleDelete(){
+        const {selectedFriendId,friends} = this.state;
+        const friender = friends.find((friend)=>friend.id == selectedFriendId);
+        console.log(selectedFriendId);
+        console.log(friender);
+        const deleteme = (await axios.delete('/api/friends',{data: {name: friender.name, birthday: friender.birthday }}));
+        this.setState({ friends: deleteme.data, selectedFriendId: ''});
+    }
 
     handleSearch(e){
         this.setState({search: e.target.value.toLowerCase()});
@@ -102,7 +108,7 @@ class App extends Component{
                         </div>
                         <div id='bday-display'>
                             {
-                                !!selectedFriendId && <Friend selectedFriendId={selectedFriendId} />
+                                !!selectedFriendId && <Friend handleDelete={this.handleDelete} selectedFriendId={selectedFriendId} />
                             }
                         </div>
                     </div>

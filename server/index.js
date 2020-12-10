@@ -44,7 +44,7 @@ app.post('/api/friends',async(req,res,next)=>{
 app.delete('/api/friends',async(req,res,next)=>{
     try{
         console.log(req.body);
-        const deleteFriend = await Friend.findByPk({
+        const deleteFriend = await Friend.findOne({
             where: {
                 name: req.body.name
             }
