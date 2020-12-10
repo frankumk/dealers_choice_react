@@ -28,9 +28,28 @@ app.get('/api/friends',async(req,res,next)=>{
 
 app.post('/api/friends',async(req,res,next)=>{
     try{
-        console.log(req.body);
+        //console.log(req.body);
         const newFriend = await Friend.create(req.body);
         await newFriend.save();
+        res.send(await Friend.findAll({
+            order: [
+                ['name','ASC'] 
+            ]
+        }));
+    }catch(ex){
+        next(ex);
+    }
+})
+
+app.delete('/api/friends',async(req,res,next)=>{
+    try{
+        console.log(req.body);
+        const deleteFriend = await Friend.findByPk({
+            where: {
+                name: req.body.name
+            }
+        })
+        await deleteFriend.destroy();
         res.send(await Friend.findAll({
             order: [
                 ['name','ASC'] 
