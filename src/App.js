@@ -69,7 +69,6 @@ class App extends Component{
         const {selectedFriendId,friends} = this.state;
         const friender = friends.find((friend)=>friend.id == selectedFriendId);
         console.log(selectedFriendId);
-        console.log(friender);
         const deleteme = (await axios.delete('/api/friends',{data: {name: friender.name, birthday: friender.birthday }}));
         this.setState({ friends: deleteme.data, selectedFriendId: ''});
     }
