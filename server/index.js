@@ -70,7 +70,7 @@ app.get('/api/friends/:id',async(req,res,next)=>{
 
 const init = async()=>{
     try{
-        await client.authenticate();
+        await db.authenticate();
         await syncAndSeed();
 
         const port = process.env.PORT || 3000;
