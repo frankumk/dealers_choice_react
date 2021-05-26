@@ -4,7 +4,7 @@ const path = require('path');
 const moment = require('moment');
 const Sequelize = require('sequelize')
 
-const {db, syncAndSeed, Friend} = require('./db');
+const {db, client, syncAndSeed, Friend} = require('./db');
 
 const app = express();
 
@@ -70,7 +70,7 @@ app.get('/api/friends/:id',async(req,res,next)=>{
 
 const init = async()=>{
     try{
-        await db.authenticate();
+        await client.authenticate();
         await syncAndSeed();
 
         const port = process.env.PORT || 3000;

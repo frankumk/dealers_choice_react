@@ -30,7 +30,7 @@ if (process.env.DATABASE_URL) {
 const client = new Sequelize('postgres://localhost/birthdays', config)
 
 
-const Friend = db.define('friend',{
+const Friend = client.define('friend',{
     name: {
         type: STRING,
         allowNull: false,
@@ -60,7 +60,7 @@ const Friend = db.define('friend',{
 })
 
 const syncAndSeed = async()=>{
-    await db.sync({ force: true });
+    await client.sync({ force: true });
     // await Promise.all([
     //     Friend.create({name: 'Kayla', birthday: '1989/01/14', email: 'frankumk@gmail.com'}),
     //     Friend.create({name: 'Max', birthday: '08/21'}),
@@ -77,6 +77,7 @@ const syncAndSeed = async()=>{
 
 module.exports = {
     db,
+    client,
     syncAndSeed,
     Friend
 }
