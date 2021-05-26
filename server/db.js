@@ -6,6 +6,30 @@ const { STRING } = Sequelize;
 const { DATEONLY, INTEGER, VIRTUAL } = Sequelize
 const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/birthdays')
 
+let config;
+if (process.env.DATABASE_URL) {
+  config = {
+    logging: false,
+    operatorsAliases: false,
+    dialect: "postgres",
+    protocol: "postgres",
+    ssl: true,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  }
+} else {
+  config = {
+    logging: false,
+    operatorsAliases: false,
+  }
+}
+const client = new Sequelize('postgres://localhost/birthdays', config)
+
+
 const Friend = db.define('friend',{
     name: {
         type: STRING,
